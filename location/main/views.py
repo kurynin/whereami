@@ -47,7 +47,7 @@ def login(request):
         if user is not None:
             auth_login(request, user)
             return redirect('/')
-        else:4
+        else:
             return redirect('/?msg=incorrect email or password')
     else:
         return redirect('/?msg=check fields')
