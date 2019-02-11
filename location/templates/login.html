@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<form action="/login/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Login">
+    {% if msg %}
+        <p style="color: red">{{ msg }}</p>
+    {% endif %}
+</form>
+
+<br>
+
+<form action="/register/" method="get">
+    <input type="submit" value="Register">
+</form>
+</body>
+</html>
