@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from main.forms import UploadForm, LoginForm, RegisterForm
 from main.models import Request
+from main.tasks import wait
 
 
 @require_GET
@@ -96,6 +97,8 @@ def upload(request):
 
         # Engine simulator :)
         reversed_text = text[::-1]
+
+        wait()
 
         req = Request.objects.create(user=user, text=text, result=reversed_text)
 

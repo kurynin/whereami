@@ -7,3 +7,7 @@ class Request(models.Model):
     text = models.CharField(max_length=80)
     result = models.CharField(max_length=80, null=True)
     creation_date = models.DateTimeField(auto_now_add=True)
+
+
+class TMP(models.Model):
+    text = models.CharField(max_length=50)
