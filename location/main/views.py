@@ -122,19 +122,19 @@ def result(request):
 
         form = GetFileURL(request.GET, res.path_to_gga)
         form.is_valid()
-        gga_url = form.cleaned_data['file'].url
+        # gga_url = form.cleaned_data['file'].url
         gga_name = form.cleaned_data['file'].name
 
         form = GetFileURL(request.GET, res.path_to_rtk)
         form.is_valid()
-        rtk_url = form.cleaned_data['file'].url
+        # rtk_url = form.cleaned_data['file'].url
         rtk_name = form.cleaned_data['file'].name
 
         return render(request, 'results.html', context={'result_id': result_id,
                                                         'gga_url': gga_url,
                                                         'rtk_url': rtk_url,
-                                                        'gga_name': gga_name,
-                                                        'rtk_name': rtk_name}
-        )
+                                                        #'gga_name': gga_name,
+                                                        #'rtk_name': rtk_name
+                                                        })
     else:
         return redirect('/')
