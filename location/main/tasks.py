@@ -57,8 +57,8 @@ def process(request_id):
 
     status = list(Status.objects.filter(name="finished"))
 
-    Result.objects.create(path_to_gga=settings.BASE_DIR + '/media/' + req.file.name + '.gga',
-                          path_to_rtk=settings.BASE_DIR + '/media/' + req.file.name + '.rtk',
+    Result.objects.create(path_to_gga='/media/' + req.file.name + '.gga',
+                          path_to_rtk='/media/' + req.file.name + '.rtk',
                           request_id=req)
 
     Request.objects.filter(user=user[0].id).update(status=status[0])
