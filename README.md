@@ -4,10 +4,14 @@
 0. Linux (пока что)
 1. Python 3.5
 2. Django 2.1.5
+3. Библиотека huey для асинхронных задач
 ```
 sudo apt-get update
 sudo apt-get install python3-pip
 sudo pip3 install django
+sudo pip install huey
+sudo pip install redis
+sudo pip install gevent
 ```
 
 ### Запуск
@@ -25,6 +29,11 @@ python whereami/location/manage.py runserver
 ```
 
 Сервер будет доступен по адресу <http://127.0.0.1:8000/>.
+
+Также необходимо запустить в соседнем терминале huey:
+```
+python whereami/location/manage.py run_huey
+```
 
 ### Администрирование
 Админпанель находится по адресу <http://127.0.0.1:8000/admin> (логиниться с помощью созданного суперюзера).
