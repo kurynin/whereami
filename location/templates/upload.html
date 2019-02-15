@@ -5,7 +5,7 @@
     <title>Home</title>
 </head>
 <body>
-<form action="/upload/" method="post">
+<form action="/upload/" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Upload">
@@ -21,21 +21,32 @@
     <input type="submit" value="Logout">
 </form>
 
-{% if last_result %}
-    <br><br>
-    <p>Result: </p>
-    <h3>{{ last_result }}</h3>
-{% endif %}
-
 <br><br>
 
 {% if last_submits_list %}
-    <p>Last submits:</p>
+    <h3>History:</h3>
+    <table border="1">
+        <tr>
+            <td><strong>ID</strong></td>
+            <td><strong>Antenna</strong></td>
+            <td><strong>Uploaded file</strong></td>
+            <td><strong>Result</strong></td>
+        </tr>
 
-    {% for submit in last_submits_list %}
-        <p>{{ submit }}</p>
-    {% endfor %}
+        {% for submit in last_submits_list %}
+            <tr>
+                <td>{{ submit.id }}</td>
+                <td>{{ submit.antenna }}</td>
+                <td><a href="{{ submit.file.url }}">download</a></td>
+                {% if submit.status.name == 'processing' %}
+                    <td>{{ submit.status.description }}</td>
+                {% else %}
+                    <td><a href="/result/?result_id={{ submit.res }}">Result</a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
 
+    </table>
 {% endif %}
 
 </body>

@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
+from django.conf import settings
 import main.views
 
 urlpatterns = [
@@ -23,5 +26,9 @@ urlpatterns = [
     path('login/', main.views.login),
     path('register/', main.views.register),
     path('logout/', main.views.logout),
-    path('upload/', main.views.upload)
+    path('upload/', main.views.upload),
+    path('result/', main.views.result)
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

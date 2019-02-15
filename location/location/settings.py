@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from huey.contrib.sqlitedb import SqliteHuey
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -36,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
-
+    'huey.contrib.djhuey'
 ]
 
 MIDDLEWARE = [
@@ -116,9 +117,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'testtopcon'
 EMAIL_HOST_PASSWORD = '1q2w3e4r3e2w1q'
 
 EMAIL_USE_SSL = True
+
+HUEY = SqliteHuey('db.sqlite3')
