@@ -9,7 +9,7 @@ import subprocess
 
 huey = SqliteHuey('db.sqlite3')
 
-PATH_TO_SOME_TOPCON_INFO = settings.BASE_DIR + '/media/some_topcon_info.ssr'
+PATH_TO_SOME_TOPCON_INFO = settings.BASE_DIR + '/engine/some_topcon_info.ssr'
 
 
 def create_ini_file(req):
@@ -35,13 +35,13 @@ def process(request_id):
     sleep(4)
 
     subprocess.call(
-        'g++ ' + settings.BASE_DIR + '/media/engine.cpp -o ' +
-        settings.BASE_DIR + '/media/a.out', shell=True)
+        'g++ ' + settings.BASE_DIR + '/engine/engine.cpp -o ' +
+        settings.BASE_DIR + '/engine/a.out', shell=True)
 
     sleep(4)
 
     subprocess.call(
-        settings.BASE_DIR + '/media/a.out ' +
+        settings.BASE_DIR + '/engine/a.out ' +
         settings.BASE_DIR + '/media/' + req.file.name + '.ini ' +
         req.file.name, shell=True)
 
