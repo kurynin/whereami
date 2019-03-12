@@ -22,6 +22,7 @@ python whereami/location/manage.py makemigrations
 python whereami/location/manage.py migrate
 python whereami/location/manage.py createsuperuser
 ```
+Также создать в whereami/location директорию media.
 
 Для запуска сервера необходимо выполнить:
 ```
