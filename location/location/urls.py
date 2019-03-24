@@ -27,7 +27,8 @@ urlpatterns = [
     path('register/', main.views.register),
     path('logout/', main.views.logout),
     path('upload/', main.views.upload),
-    path('result/', main.views.result)
+    path('result/', main.views.result),
+    path('upload_antennes/', main.views.upload_antennes)
 ]
 
 urlpatterns += staticfiles_urlpatterns()

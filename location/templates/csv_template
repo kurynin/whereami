@@ -1,0 +1,4 @@
+COORDINATE,E,COV
+X,{{ X }},{{ X_COV }}
+Y,{{ Y }},{{ Y_COV }}
+Z,{{ Z }},{{ Z_COV }}

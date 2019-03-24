@@ -4,9 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.core.files import File
-from main.forms import UploadForm, LoginForm, RegisterForm, GetFileURL
-from main.models import Request, Result, Status
+from main.forms import UploadForm, LoginForm, RegisterForm, UploadAntennes
+from main.models import Request, Result, Status, Antennes
 from main.tasks import process
+from django.http import HttpResponse
 
 
 @require_GET
@@ -30,7 +31,8 @@ def home(request):
                 else:
                     sub.res = ''
 
-        return render(request, 'upload.html', context={'form': form, 'msg': msg,
+        return render(request, 'upload.html', context={'form': form,
+                                                       'msg': msg,
                                                        'last_submits_list': last_submits_list})
     else:
         form = LoginForm()
@@ -101,7 +103,7 @@ def upload(request):
 
         status = list(Status.objects.filter(name="processing"))
 
-        req = Request.objects.create(user=user, antenna=antenna, file=file, status=status[0])
+        req = Request.objects.create(user=user, antenna=antenna.name, file=file, status=status[0])
 
         req.save()
 
@@ -109,7 +111,7 @@ def upload(request):
 
         return redirect('/')
     else:
-        return redirect('/?msg=invalid text')
+        return redirect('/?msg=invalid request')
 
 
 @require_GET
@@ -121,8 +123,33 @@ def result(request):
         res = res[0]
 
         return render(request, 'results.html', context={'result_id': result_id,
-                                                        'gga_url': res.path_to_gga,
-                                                        'rtk_url': res.path_to_rtk,
+                                                        'pdf_url': res.path_to_pdf,
+                                                        'csv_url': res.path_to_csv,
                                                         })
     else:
         return redirect('/')
+
+
+@login_required
+def upload_antennes(request):
+    if request.method == 'GET':
+        if not request.user.is_superuser:
+            return redirect('/')
+
+        form = UploadAntennes()
+
+        return render(request, 'upload_antennes.html', context={'form': form})
+    elif request.method == 'POST':
+        form = UploadAntennes(request.POST, request.FILES)
+
+        if form.is_valid():
+            Antennes.objects.all().delete()
+
+            file = form.cleaned_data['file']
+
+            Antennes.objects.bulk_create([
+                Antennes(name=line.decode('utf-8').strip())
+                for line in file
+            ])
+
+        return redirect('/upload_antennes')

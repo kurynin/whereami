@@ -122,8 +122,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'testtopcon'
+EMAIL_HOST_USER = 'testtopcon@yandex.ru'
 EMAIL_HOST_PASSWORD = '1q2w3e4r3e2w1q'
+
+# EMAIL_HOST_USER = os.getenv('EMAIL_LOGIN')
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
 
 EMAIL_USE_SSL = True
 

@@ -1,17 +1,9 @@
 from django import forms
-
-
-CHOICES_ANTENS = (
-    (1, 'antenna_01'),
-    (2, 'antenna_02'),
-    (3, 'antenna_03'),
-    (4, 'antenna_04'),
-    (5, 'antenna_05'),
-)
+from main.models import Antennes
 
 
 class UploadForm(forms.Form):
-    antenna = forms.ChoiceField(choices=CHOICES_ANTENS)
+    antenna = forms.ModelChoiceField(queryset=Antennes.objects.all(), required=True)
     file = forms.FileField(required=True)
 
 
@@ -23,5 +15,5 @@ class LoginForm(forms.Form):
 RegisterForm = LoginForm
 
 
-class GetFileURL(forms.Form):
-    file = forms.FileField()
+class UploadAntennes(forms.Form):
+    file = forms.FileField(required=True)

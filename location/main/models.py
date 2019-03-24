@@ -16,6 +16,13 @@ class Request(models.Model):
 
 
 class Result(models.Model):
-    path_to_gga = models.CharField(max_length=300)
-    path_to_rtk = models.CharField(max_length=300)
+    path_to_pdf = models.CharField(max_length=300)
+    path_to_csv = models.CharField(max_length=300)
     request_id = models.ForeignKey(Request, on_delete=models.CASCADE, default="", null=True)
+
+
+class Antennes(models.Model):
+    name = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.name

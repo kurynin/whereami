@@ -27,14 +27,19 @@ int main(int argc, char *argv[]) {
     tmp = str + argv[2] + rtk;
     ofstream outStat(tmp.c_str());
 
-    int A, B, C, X = 1;
+    int A, B, C = 3, X = 1;
 
-    inIni >> str >> str >> C;
+    ifstream inGGA("template.gga");
+
+    inIni >> str >> str >> str;
     inFile >> A;
     inTopconInfo >> B;
 
-    outResult << A * X * X + B * X + C << "\n";
-    outStat << "A = " << A << " B = " << B << " C = " << C << "\n";
+    outStat << "A = " << A << " B = " << B << " C = " << str << "\n";
+
+    while (inGGA >> str) {
+        outResult << str << '\n';
+    }
 
     return 0;
 }

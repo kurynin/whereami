@@ -1,0 +1,146 @@
+\documentclass[a4paper, 12pt]{article} 
+\usepackage{cmap} % Пакет для поиска в полученной пдфке 
+\usepackage[utf8]{inputenc} % Ззамена кодировки файла на utf8 
+\usepackage[T2A]{fontenc} % Подключение кодировки шрифтов 
+\usepackage[russian]{babel} % Использование русского языка 
+\usepackage[left=2cm, right=2cm, top=1cm, bottom=2cm]{geometry} % Изменение размеров полей 
+\usepackage{amsmath, amsfonts, amsthm, mathtools, amssymb, icomma, units, yfonts} 
+\usepackage{amsthm} % Пакет для нормального оформления теорем 
+\usepackage{algorithmicx, algorithm} 
+\usepackage{algpseudocode} 
+\usepackage{graphicx} 
+\usepackage{tikz} 
+\usepackage{esvect} 
+\usepackage{enumitem} 
+\usepackage{dcolumn} 
+\usetikzlibrary{calc,matrix}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+
+\begin{document} 
+	\title{Отчет}
+	\date{}
+	\maketitle
+
+	
+	\noindent
+	\begin{tabular}{|c|c|c|}
+		\hline
+		$\xi$ & $\textbf{E}(\xi)$ &  $\textbf{COV}(\xi)$\\ \hline
+		$\textbf{X}$ & {{ X }} & {{ X_COV }} \\ \hline
+		$\textbf{Y}$ & {{ Y }} & {{ Y_COV }} \\ \hline
+		$\textbf{Z}$ & {{ Z }} & {{ Z_COV }} \\ \hline
+	\end{tabular}\\ \\ \\
+	$\textbf{E}(\xi)$ - математическое ожидание величины;  
+	$\textbf{COV}(\xi)$ - ковариация величины\\ \\
+
+
+
+    \begin{center}
+	\begin{tikzpicture}
+		\begin{axis}
+			[
+			title = $\text{Количество спутников в зависимости от времени}$,
+			xlabel = {$\textbf{time}$},
+			ylabel = {$\textbf{number of satellites}$},
+			xmin = { {{ TIME_MIN }} },
+			xmax = { {{ TIME_MAX }} },
+			ymin = {0},
+			ymax = {40},
+			width = {400pt},
+			minor tick num = 5
+			]
+			\addplot[blue] coordinates {
+			{% for node in sputniks %} ({{ node.0 }}, {{ node.1 }})
+            {% endfor %} };
+		\end{axis}
+	\end{tikzpicture}
+	\end{center}
+
+\newpage
+
+    \begin{center}
+	\begin{tikzpicture}
+		\begin{axis}
+			[
+			title = $\text{Зависимость координаты Х от времени}$,
+			xlabel = {$\textbf{time}$},
+			ylabel = {$\textbf{coordinate X}$},
+			xmin = { {{ TIME_MIN }} },
+			xmax = { {{ TIME_MAX }} },
+			ymin = {0},
+			ymax = {1},
+			width = {400pt},
+			minor tick num = 2
+			]
+			\addplot[red] coordinates {
+			{% for node in X_ARR %} ({{ node.0 }}, {{ node.1 }})
+            {% endfor %} };
+	\end{axis}
+	\end{tikzpicture}
+	\end{center}
+
+	\:
+    \begin{center}
+	\begin{tikzpicture}
+		\begin{axis}
+			[
+			title = $\text{Зависимость координаты Y от времени}$,
+			xlabel = {$\textbf{time}$},
+			ylabel = {$\textbf{coordinate Y}$},
+			xmin = { {{ TIME_MIN }} },
+			xmax = { {{ TIME_MAX }} },
+			ymin = {0},
+			ymax = {1},
+			width = {400pt},
+			minor tick num = 2
+			]
+			\addplot[green] coordinates {
+			{% for node in Y_ARR %} ({{ node.0 }}, {{ node.1 }})
+            {% endfor %} };
+	\end{axis}
+	\end{tikzpicture}
+	\end{center}
+
+	\newpage
+
+	\begin{center}
+		\begin{tikzpicture}
+		\begin{axis}
+			[
+			title = $\text{Зависимость координаты Z от времени}$,
+			xlabel = {$\textbf{time}$},
+			ylabel = {$\textbf{coordinate Z}$},
+			xmin = { {{ TIME_MIN }} },
+			xmax = { {{ TIME_MAX }} },
+			ymin = {0},
+			ymax = {1},
+			width = {400pt},
+			minor tick num = 2
+			]
+			\addplot[black] coordinates {
+			{% for node in Z_ARR %} ({{ node.0 }}, {{ node.1 }})
+            {% endfor %} };
+		\end{axis}
+		\end{tikzpicture}
+	\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
